@@ -43,8 +43,7 @@ Docker -> http://localhost:9000/coffee/swagger-ui/
 
 API:
 
-
-
+![2022-05-04 19_44_36-Swagger UI](https://user-images.githubusercontent.com/10815551/166839097-1d9500ef-fb96-44fc-9d2e-49193e929578.png)
 
 # PORTS
 
