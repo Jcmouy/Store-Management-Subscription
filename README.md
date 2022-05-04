@@ -65,8 +65,6 @@ Docker
 
 4- Extend existing roles system (ADMIN, USER, EXTERNAL), and the permissions of each one.
 
-5- Verify browser support (Chrome, Safari, Firefox, Edge, iOS, IE9+)
-
 # CONSIDERATIONS TO KEEP IN MIND IN THE FUTURE
 
 * As Docker is use, it would be necessary to consider a Docker vulnerability scanning tool, to prevent new vulnerabilities and different hacking scenarios on libraries and operating systems.
