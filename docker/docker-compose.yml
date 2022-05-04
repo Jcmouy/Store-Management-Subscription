@@ -1,0 +1,12 @@
+version: '3'
+
+services:   
+  # SPRING BOOT - coffee
+  fibospiralmatrix:
+    container_name: coffee
+    build:
+        context: Dockerfiles
+        dockerfile: Dockerfile
+    image: coffee:latest
+    ports:
+        - 9000:8080
