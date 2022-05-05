@@ -1,6 +1,7 @@
 package com.coffee.shop.security.service.impl;
 
 import com.coffee.shop.constants.Constants;
+import com.coffee.shop.exception.NotValidException;
 import com.coffee.shop.security.dto.AuthenticateUserDTO;
 import com.coffee.shop.security.entity.Role;
 import com.coffee.shop.security.entity.User;
@@ -19,6 +20,7 @@ import com.coffee.shop.security.service.TokenService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -66,18 +68,33 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public AuthenticateUserDTO authenticateUser(LoginRequest loginRequest) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        JwtModel jwtModel = jwtUtils.generateJwtToken(authentication.getName());
+        if (!isUserAlreadyLoggedIn(loginRequest)){
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            JwtModel jwtModel = jwtUtils.generateJwtToken(authentication.getName());
 
-        this.tokenService.setSecretKey(jwtModel.getToken(), modelMapper.map(jwtModel, Jwt.class));
+            this.tokenService.setSecretKey(jwtModel.getToken(), modelMapper.map(jwtModel, Jwt.class));
 
-        UserDetailsImpl userDetailsImpl = (UserDetailsImpl) authentication.getPrincipal();
-        List<String> roles = userDetailsImpl.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.toList());
-        return getAuthenticationUserDTO(jwtModel, userDetailsImpl, roles);
+            UserDetailsImpl userDetailsImpl = (UserDetailsImpl) authentication.getPrincipal();
+            List<String> roles = userDetailsImpl.getAuthorities().stream()
+                    .map(GrantedAuthority::getAuthority)
+                    .collect(Collectors.toList());
+            return getAuthenticationUserDTO(jwtModel, userDetailsImpl, roles);
+        }
+        throw new NotValidException("The user that was submitted is already logged in!");
+    }
+
+    private boolean  isUserAlreadyLoggedIn(LoginRequest loginRequest) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            return validateSameUser(loginRequest.getUsername(), authentication.getName());
+        }
+        return false;
+    }
+
+    private boolean validateSameUser(String loginUser, String authUser) {
+        return loginUser.equals(authUser);
     }
 
     @Override

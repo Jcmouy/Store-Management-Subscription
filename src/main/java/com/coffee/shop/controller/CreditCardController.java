@@ -43,7 +43,7 @@ public class CreditCardController {
         log.info("CreditCardController:  addCreditCard: {}", creditCardRequest);
         CreditCardInfoUserDto creditCardInfoUserDto = creditCardService.addCreditCard(creditCardRequest);
         return new ResponseEntity<ResponseDto>(new ResponseDto
-                ("OK", 204, "Successfully added credit card for user "
+                ("OK", 200, "Successfully added credit card for user "
                         + creditCardInfoUserDto.getUserCreditCard()
                         + ", use the following token to recover its information " + creditCardInfoUserDto.getToken()), HttpStatus.OK);
     }

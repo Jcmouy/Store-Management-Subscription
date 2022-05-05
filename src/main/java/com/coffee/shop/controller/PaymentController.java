@@ -51,7 +51,7 @@ public class PaymentController {
                     ("FAILED", 404, "Could not find any remaining subscriptions to charge"), HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<ResponseDto>(new ResponseDto
-                ("OK", 204, "Successfully executed current month charges, invoices: "
+                ("OK", 204, "Successfully executed current month renew, invoices: "
                         + paymentRenewMonthlyChargeDto.getPaymentInvoices()
                         + ", month: " + paymentRenewMonthlyChargeDto.getMonth()
                         + ", year: " + paymentRenewMonthlyChargeDto.getYear()), HttpStatus.OK);

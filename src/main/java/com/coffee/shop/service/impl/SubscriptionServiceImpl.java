@@ -81,7 +81,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     private void checkIfUserIsAlreadySubscribed(SubscriptionRequest subscriptionRequest) {
         if (this.getSubscriptionFromUserUsername(subscriptionRequest.getUserName()) != null){
             throw new AlreadyExistException("The User with username " + subscriptionRequest.getUserName() +
-                    " already exist in the database!");
+                    " already has a subscription!");
         }
     }
 

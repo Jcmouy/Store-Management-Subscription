@@ -3,6 +3,7 @@ package com.coffee.shop.service.impl;
 import com.coffee.shop.entity.Subscribe;
 import com.coffee.shop.entity.Subscription;
 import com.coffee.shop.enums.InviteState;
+import com.coffee.shop.enums.PlanTypes;
 import com.coffee.shop.exception.NotValidException;
 import com.coffee.shop.exception.ObjectNotFoundException;
 import com.coffee.shop.model.request.SubscribeRequest;
@@ -44,6 +45,7 @@ public class SubscribeServiceImpl implements SubscribeService {
     }
 
     private void validateSubscribeRequest(Subscription subscription, SubscribeRequest subscribeRequest){
+        validateTypeOfSubscription(subscription);
         validateNumberOfUsersInSubscription(subscription);
         validateUserExist(subscribeRequest.getUserSubscribe());
         validateUserIsNotInAnotherSubscription(subscribeRequest.getUserSubscribe());
@@ -56,6 +58,12 @@ public class SubscribeServiceImpl implements SubscribeService {
         subscribe.setUser(user);
         subscribe.setInviteState(InviteState.PENDING);
         return subscribe;
+    }
+
+    private void validateTypeOfSubscription(Subscription subscription) {
+        if (!PlanTypes.FAMILY.equals(subscription.getPlan().getPlanName())) {
+            throw new NotValidException("Only family type of plan can subscribe users");
+        }
     }
 
     private void validateNumberOfUsersInSubscription(Subscription subscription) {

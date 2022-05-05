@@ -3,7 +3,6 @@ package com.coffee.security;
 import com.coffee.shop.dto.response.InvitesDto;
 import com.coffee.shop.security.security.jwt.model.JwtModel;
 import com.coffee.shop.security.security.jwt.util.JwtUtils;
-import com.coffee.shop.security.service.RoleService;
 import com.coffee.shop.security.service.UserService;
 import com.coffee.shop.security.service.impl.TokenServiceImpl;
 import com.coffee.shop.security.service.impl.UserDetailsServiceImpl;
@@ -46,9 +45,6 @@ public class AuthorizeTest {
 
     @Autowired
     JwtUtils jwtUtil;
-
-    @Autowired
-    RoleService roleService;
 
     @Test
     @WithMockUser

@@ -1,7 +1,11 @@
 package com.coffee.controller;
 
 import com.coffee.shop.dto.response.InvitesDto;
+import com.coffee.shop.entity.Subscribe;
+import com.coffee.shop.enums.InviteState;
 import com.coffee.shop.model.request.InviteRequest;
+import com.coffee.shop.security.entity.Role;
+import com.coffee.shop.security.entity.User;
 import com.coffee.shop.security.security.jwt.model.JwtModel;
 import com.coffee.shop.security.security.jwt.util.JwtUtils;
 import com.coffee.shop.security.service.UserService;
@@ -11,6 +15,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.test.context.support.WithMockUser;
@@ -20,7 +25,9 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
