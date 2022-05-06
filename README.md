@@ -100,6 +100,8 @@ API:
 /coffee/user/rejectInvite -> Reejct the invitation
  ```
 
+Note that for all endpoints, except those belonging to Auth Controller and Auth External Controller, a Bearer Token must be passed.
+
 
 Examples of calls to these endpoints can be found in the folder "captures"
 
