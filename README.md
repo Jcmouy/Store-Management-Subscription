@@ -127,6 +127,7 @@ ROLE_EXTERNAL -> User with credentials to perform the charges or renewal of the 
 
 H2 Database:
 
+![H2Database](https://user-images.githubusercontent.com/10815551/167046013-cb382816-9ddc-403d-95a6-6480eb7a3746.png)
 
 # PORTS
 
