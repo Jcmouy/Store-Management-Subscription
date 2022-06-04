@@ -1,11 +1,11 @@
-# COFFEE SHOP
+# STORE MANAGEMENT BACKEND
 
 # OBJECTIVE
 
-The objective of this project is to create a functional backend for a coffee shop, which must have the following functionalities:
+The objective of this project is to create a functional backend for the management of a store with the possibility of subscribing to benefit plans, this backend will have the following functionalities:
 
-* Register into the Coffee Shop
-* Log in/out of the Coffee Shop
+* Register into the Store
+* Log in/out of the Store
 * Subscribe to a plan
   * Personal
   * Family
@@ -14,11 +14,13 @@ The objective of this project is to create a functional backend for a coffee sho
 * Upload credit card information
 * Endpoint use by an external source that will perform the charges to the subscriptions
 
+In this project the type of store chosen for the backend was a coffee shop.
+
 # MANUAL INSTALLATION
 
-* To execute a new version of the Coffee Shop project:
+* To execute a new version of the Store mangament project:
 
-- Execute "maven clean install" in the Coffee Shop project.
+- Execute "maven clean install" in the Store mangament project.
 
 
 - Doing this will automatically copy the jar file to the target folder in the docker compose project (Dockerfiles/target)
